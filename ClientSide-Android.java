@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
         mImageView = findViewById(R.id.imageView);
 
 //        HashMap<String, Object> params = new HashMap<>();
+//
 //        ParseCloud.callFunctionInBackground("cloudCodeTest", params, new FunctionCallback<String>() {
 //            @Override
 //            public void done(String response, ParseException e) {
@@ -180,35 +181,165 @@ public class MainActivity extends AppCompatActivity {
 //       Passing ParseFile
 //        SUCCESSFUL
 
-        final HashMap<String,ParseFile> params = new HashMap<>();
-
-        byte[] data = "This is a great Movie".getBytes();
-        final ParseFile file = new ParseFile("resume.txt", data);
-
-        file.saveInBackground(new SaveCallback() {
-            public void done(ParseException e) {
-                // If successful add file to user and signUpInBackground
-                if(null == e){
-
-                    params.put("file",file);
-
-                    ParseCloud.callFunctionInBackground("addMovie", params, new FunctionCallback<String>() {
-                        @Override
-                        public void done(String response, ParseException e) {
-                            if (e == null) {
-                                Log.d(TAG, "done: Response: " + response);
-                            } else {
-                                Log.e(TAG, "done: Error: " + e.getMessage());
-                            }
-                        }
-                    });
-
-                }
-            }
-        });
-
-
+//        final HashMap<String,ParseFile> params = new HashMap<>();
+//
+//        byte[] data = "This is a great Movie".getBytes();
+//        final ParseFile file = new ParseFile("resume.txt", data);
+//
+//        file.saveInBackground(new SaveCallback() {
+//            public void done(ParseException e) {
+//                // If successful add file to user and signUpInBackground
+//                if(null == e){
+//
+//                    params.put("file",file);
+//
+//                    ParseCloud.callFunctionInBackground("addFile", params, new FunctionCallback<String>() {
+//                        @Override
+//                        public void done(String response, ParseException e) {
+//                            if (e == null) {
+//                                Log.d(TAG, "done: Response: " + response);
+//                            } else {
+//                                Log.e(TAG, "done: Error: " + e.getMessage());
+//                            }
+//                        }
+//                    });
+//
+//                }
+//            }
+//        });
 
 
-        }
+//        ParseCloud.callFunctionInBackground("getAllTableNames", params, new FunctionCallback<String>() {
+//            @Override
+//            public void done(String response, ParseException e) {
+//                if (e == null) {
+//                    Log.d(TAG, "done: Response: " + response);
+//                } else {
+//                    Log.e(TAG, "done: Error: " + e.getMessage());
+//                }
+//            }
+//        });
+
+//       ParseCloud.callFunctionInBackground("getAllTableRecords", params, new FunctionCallback<String>() {
+//            @Override
+//            public void done(String response, ParseException e) {
+//                if (e == null) {
+//                    Log.d(TAG, "done: Response: " + response);
+//                } else {
+//                    Log.e(TAG, "done: Error: " + e.getMessage());
+//                }
+//            }
+//        });
+
+//        ParseCloud.callFunctionInBackground("getAllTableNames", params, new FunctionCallback<Integer>() {
+//            @Override
+//            public void done(Integer response, ParseException e) {
+//                if (e == null) {
+//                    Log.d(TAG, "done: Response: " + response);
+//                } else {
+//                    Log.e(TAG, "done: Error: " + e.getMessage());
+//                }
+//            }
+//        });
+
+//        ParseCloud.callFunctionInBackground("getAllTableNames", params, new FunctionCallback<ArrayList<HashMap<String,String>>>() {
+//            @Override
+//            public void done(ArrayList<HashMap<String,String>> list, ParseException e) {
+//                if (e == null) {
+//                    Log.d(TAG, "done: Response: " + list);
+//
+//                    Log.d(TAG, "done: List ------");
+//
+//                    for (int i = 0; i < list.size(); i++) {
+//                        Log.d(TAG, "done: Table " + i + " name = " + list.get(i).get("name"));
+//                    }
+//
+//                } else {
+//                    Log.e(TAG, "done: Error: " + e.getMessage());
+//                }
+//            }
+//        });
+
+//        HashMap<String, Object> params = new HashMap<>();
+//        final String tableName = "Student";
+//        params.put("tableName", tableName);
+//
+//        ParseCloud.callFunctionInBackground("getAllTableRecords", params, new FunctionCallback<ArrayList<HashMap<String, String>>>() {
+//            @Override
+//            public void done(ArrayList<HashMap<String, String>> list, ParseException e) {
+//                if (e == null) {
+//                    Log.d(TAG, "done: Response: " + list);
+//
+//                    Log.d(TAG, "done: List ------");
+//
+//                    for (int i = 0; i < list.size(); i++) {
+//                        Log.d(TAG, "done: " + tableName + " " + i + " name = " + list.get(i).get("name"));
+//                    }
+//
+//                } else {
+//                    Log.e(TAG, "done: Error: " + e.getMessage());
+//                }
+//            }
+//        });
+
+//        HashMap params = new HashMap();
+//
+//        params.put("name", "Iniesta");
+//        params.put("age", 34);
+//
+//        ParseCloud.callFunctionInBackground("addStudentRecord", params, new FunctionCallback<String>() {
+//            @Override
+//            public void done(String response, ParseException e) {
+//                if (e == null) {
+//
+//                    Log.d(TAG, "done: Response = " + response);
+//
+//                } else {
+//                    Log.e(TAG, "done: Error: " + e.getMessage());
+//                }
+//            }
+//        });
+
+
+/*        Not Working
+        HashMap<String,ArrayList<HashMap>> params = new HashMap<>();
+
+        ArrayList<HashMap> students = new ArrayList<>();
+
+        HashMap student = new HashMap();
+        student.put("name","Hazard");
+        student.put("age",25);
+
+        students.add(student);
+
+        params.put("students",students);*/
+
+//        HashMap<String,ArrayList> params = new HashMap<>();
+//
+//        ArrayList<String> names = new ArrayList<>();
+//        names.add("Darren");
+//        names.add("Gal");
+//
+//        ArrayList<Integer> ages = new ArrayList<>();
+//        ages.add(40);
+//        ages.add(18);
+//
+//        params.put("name" , names);
+//        params.put("age", ages);
+//
+//        ParseCloud.callFunctionInBackground("addStudentRecords", params, new FunctionCallback<String>() {
+//            @Override
+//            public void done(String response, ParseException e) {
+//                if (e == null) {
+//
+//                    Log.d(TAG, "done: Response = " + response);
+//
+//                } else {
+//                    Log.e(TAG, "done: Error: " + e.getMessage());
+//                }
+//            }
+//        });
+
+
+    }
 }

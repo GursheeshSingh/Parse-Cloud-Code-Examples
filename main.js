@@ -201,7 +201,6 @@ Parse.Cloud.define("addFile", function(request, response) {
 //     );
 // });
 
-
 Parse.Cloud.define("getAllTableNames", function(request, response) {
     Parse.Cloud.httpRequest({
         url:
@@ -230,7 +229,6 @@ Parse.Cloud.define("getAllTableNames", function(request, response) {
             }
 
             response.success(resource);
-
         },
         function(httpResponse) {
             // error
@@ -245,16 +243,23 @@ Parse.Cloud.define("getAllTableNames", function(request, response) {
     );
 });
 
-
 // var tableName = "student";
 
 Parse.Cloud.define("getAllTableRecords", function(request, response) {
-    
     let tableName = request.params.tableName;
 
     Parse.Cloud.httpRequest({
-        url:"http://" + serverIP + "/api/v2/" + serviceName + "/_table/" + tableName + 
-        "?api_key=" + apiKey + "&session_token=" + sessionToken
+        url:
+            "http://" +
+            serverIP +
+            "/api/v2/" +
+            serviceName +
+            "/_table/" +
+            tableName +
+            "?api_key=" +
+            apiKey +
+            "&session_token=" +
+            sessionToken
     }).then(
         function(httpResponse) {
             // success
@@ -267,7 +272,6 @@ Parse.Cloud.define("getAllTableRecords", function(request, response) {
             var resource = res.resource;
 
             response.success(resource);
-
         },
         function(httpResponse) {
             // error
@@ -282,40 +286,50 @@ Parse.Cloud.define("getAllTableRecords", function(request, response) {
     );
 });
 
-
 Parse.Cloud.define("addStudentRecord", function(request, response) {
-
     let tableName = "student";
     let name = request.params.name;
     let age = request.params.age;
-    
+
     Parse.Cloud.httpRequest({
         headers: {
-            'Content-Type': 'application/json'
+            "Content-Type": "application/json"
         },
         method: "POST",
-        url: "http://" + serverIP + "/api/v2/" + serviceName + "/_table/" + tableName + "?api_key=" + apiKey + "&session_token=" + sessionToken,
+        url:
+            "http://" +
+            serverIP +
+            "/api/v2/" +
+            serviceName +
+            "/_table/" +
+            tableName +
+            "?api_key=" +
+            apiKey +
+            "&session_token=" +
+            sessionToken,
         body: {
-            resource: [{
-                name: name,
-                age: age
-            }]
+            resource: [
+                {
+                    name: name,
+                    age: age
+                }
+            ]
         }
-    }).then(function(httpResponse) {
-    
-        response.success("Successful");
-
-    }, function(httpResponse) {
-        response.error("Error: " + httpResponse.status)
-    });
+    }).then(
+        function(httpResponse) {
+            response.success("Successful");
+        },
+        function(httpResponse) {
+            response.error("Error: " + httpResponse.status);
+        }
+    );
 });
 
 Parse.Cloud.define("addStudentRecords", function(request, response) {
-
     let tableName = "student";
     let names = request.params.name;
     let ages = request.params.age;
-    
+
     let length = names.length;
 
     let students = new Array();
@@ -323,41 +337,49 @@ Parse.Cloud.define("addStudentRecords", function(request, response) {
     for (let i = 0; i < length; i++) {
         let map = {};
 
-        map['name'] = names[i];
-        map['age'] = ages[i];
-    
-        students.push(map)
-    }
+        map["name"] = names[i];
+        map["age"] = ages[i];
 
+        students.push(map);
+    }
 
     // let name = names[0];
     // let age = ages[0];
 
     Parse.Cloud.httpRequest({
         headers: {
-            'Content-Type': 'application/json'
+            "Content-Type": "application/json"
         },
         method: "POST",
-        url: "http://" + serverIP + "/api/v2/" + serviceName + "/_table/" + tableName + "?api_key=" + apiKey + "&session_token=" + sessionToken,
+        url:
+            "http://" +
+            serverIP +
+            "/api/v2/" +
+            serviceName +
+            "/_table/" +
+            tableName +
+            "?api_key=" +
+            apiKey +
+            "&session_token=" +
+            sessionToken,
         body: {
             resource: students
         }
-    }).then(function(httpResponse) {
-    
-        response.success("Successful");
-
-    }, function(httpResponse) {
-        response.error("Error: " + httpResponse.status)
-    });
+    }).then(
+        function(httpResponse) {
+            response.success("Successful");
+        },
+        function(httpResponse) {
+            response.error("Error: " + httpResponse.status);
+        }
+    );
 });
-
 
 //Not Working
 // Parse.Cloud.define("addStudentRecords", function(request, response) {
 
 //     let tableName = "student";
 //     let students = request.params.students;
-
 
 //     let name = students[0].get("name");
 //     let age = students[0].get("name");
@@ -375,7 +397,277 @@ Parse.Cloud.define("addStudentRecords", function(request, response) {
 //             }]
 //         }
 //     }).then(function(httpResponse) {
+
+//         response.success("Successful");
+
+//     }, function(httpResponse) {
+//         response.error("Error: " + httpResponse.status)
+//     });
+// });
+
+//UPDATE Based on ID
+Parse.Cloud.define("updateStudentRecordById", function(request, response) {
+    let tableName = "student";
+    let id = request.params.id;
+    let name = request.params.name;
+    let age = request.params.age;
+
+    Parse.Cloud.httpRequest({
+        headers: {
+            "Content-Type": "application/json"
+        },
+        method: "PUT",
+        url:
+            "http://" +
+            serverIP +
+            "/api/v2/" +
+            serviceName +
+            "/_table/" +
+            tableName +
+            "?api_key=" +
+            apiKey +
+            "&session_token=" +
+            sessionToken,
+        body: {
+            resource: [
+                {
+                    id: id,
+                    name: name,
+                    age: age
+                }
+            ]
+        }
+    }).then(
+        function(httpResponse) {
+            response.success("Successful");
+        },
+        function(httpResponse) {
+            response.error("Error: " + httpResponse.status);
+        }
+    );
+});
+
+//Update Based on name
+Parse.Cloud.define("updateStudentRecordByName", function(request, response) {
+    let tableName = "student";
+    let oldName = request.params.oldName;
+    let name = request.params.name;
+    let age = request.params.age;
+
+    Parse.Cloud.httpRequest({
+        headers: {
+            "Content-Type": "application/json"
+        },
+        method: "PUT",
+        url:
+            "http://" +
+            serverIP +
+            "/api/v2/" +
+            serviceName +
+            "/_table/" +
+            tableName +
+            "?filter=" +
+            encodeURIComponent("name like " + oldName) +
+            "&api_key=" +
+            apiKey +
+            "&session_token=" +
+            sessionToken,
+        body: {
+            resource: [
+                {
+                    name: name,
+                    age: age
+                }
+            ]
+        }
+    }).then(
+        function(httpResponse) {
+            response.success("Successful");
+        },
+        function(httpResponse) {
+            response.error("Error: " + httpResponse.status);
+        }
+    );
+});
+
+//UPDATE Based on ID
+Parse.Cloud.define("updateStudentRecordsById", function(request, response) {
+    let tableName = "student";
+    let ids = request.params.ids;
+    let names = request.params.names;
+    let ages = request.params.ages;
+
+    let length = ids.length;
+
+    let students = new Array();
+
+    for (let i = 0; i < length; i++) {
+        let map = {};
+
+        map["id"] = ids[i];
+        map["name"] = names[i];
+        map["age"] = ages[i];
+
+        students.push(map);
+    }
+
+    Parse.Cloud.httpRequest({
+        headers: {
+            "Content-Type": "application/json"
+        },
+        method: "PUT",
+        url:
+            "http://" +
+            serverIP +
+            "/api/v2/" +
+            serviceName +
+            "/_table/" +
+            tableName +
+            "?api_key=" +
+            apiKey +
+            "&session_token=" +
+            sessionToken,
+        body: {
+            resource: students
+        }
+    }).then(
+        function(httpResponse) {
+            response.success("Successful");
+        },
+        function(httpResponse) {
+            response.error("Error: " + httpResponse.status);
+        }
+    );
+});
+
+//UPDATE Based on Name
+Parse.Cloud.define("updateStudentRecordsByName", function(request, response) {
+    let tableName = "student";
+    let oldNames = request.params.oldNames;
+    let names = request.params.names;
+    let ages = request.params.ages;
+
+    let length = oldNames.length;
+
+    for (let i = 0; i < length; i++) {
+        let students = new Array();
+
+        let map = {};
+
+        let oldName = oldNames[i];
+
+        map["name"] = names[i];
+        map["age"] = ages[i];
+
+        students.push(map);
+
+        Parse.Cloud.httpRequest({
+            headers: {
+                "Content-Type": "application/json"
+            },
+            method: "PUT",
+            url:
+                "http://" +
+                serverIP +
+                "/api/v2/" +
+                serviceName +
+                "/_table/" +
+                tableName +
+                "?filter=" +
+                encodeURIComponent("name like " + oldName) +
+                "&api_key=" +
+                apiKey +
+                "&session_token=" +
+                sessionToken,
+            body: {
+                resource: students
+            }
+        }).then(function(httpResponse) {
     
+        // response.success("Successful");
+
+    }, function(httpResponse) {
+        response.error("Error: " + httpResponse.status)
+    });;
+    }
+});
+
+//Update Based on name
+Parse.Cloud.define("updateStudentRecordByName", function(request, response) {
+    let tableName = "student";
+    let oldName = request.params.oldName;
+    let name = request.params.name;
+    let age = request.params.age;
+
+    Parse.Cloud.httpRequest({
+        headers: {
+            "Content-Type": "application/json"
+        },
+        method: "PUT",
+        url:
+            "http://" +
+            serverIP +
+            "/api/v2/" +
+            serviceName +
+            "/_table/" +
+            tableName +
+            "?filter=" +
+            encodeURIComponent("name like " + oldName) +
+            "&api_key=" +
+            apiKey +
+            "&session_token=" +
+            sessionToken,
+        body: {
+            resource: [
+                {
+                    name: name,
+                    age: age
+                }
+            ]
+        }
+    }).then(
+        function(httpResponse) {
+            response.success("Successful");
+        },
+        function(httpResponse) {
+            response.error("Error: " + httpResponse.status);
+        }
+    );
+});
+
+// Parse.Cloud.define("updateStudentRecords", function(request, response) {
+
+//     let tableName = "student";
+//     let names = request.params.name;
+//     let ages = request.params.age;
+
+//     let length = names.length;
+
+//     let students = new Array();
+
+//     for (let i = 0; i < length; i++) {
+//         let map = {};
+
+//         map['name'] = names[i];
+//         map['age'] = ages[i];
+
+//         students.push(map)
+//     }
+
+//     // let name = names[0];
+//     // let age = ages[0];
+
+//     Parse.Cloud.httpRequest({
+//         headers: {
+//             'Content-Type': 'application/json'
+//         },
+//         method: "POST",
+//         url: "http://" + serverIP + "/api/v2/" + serviceName + "/_table/" + tableName + "?api_key=" + apiKey + "&session_token=" + sessionToken,
+//         body: {
+//             resource: students
+//         }
+//     }).then(function(httpResponse) {
+
 //         response.success("Successful");
 
 //     }, function(httpResponse) {

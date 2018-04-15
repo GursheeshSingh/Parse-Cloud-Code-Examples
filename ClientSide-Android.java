@@ -300,6 +300,105 @@ public class MainActivity extends AppCompatActivity {
 //            }
 //        });
 
+//       HashMap params = new HashMap();
+//
+//        params.put("id",3);
+//        params.put("name", "Messi");
+//        params.put("age", 32);
+//
+//        ParseCloud.callFunctionInBackground("updateStudentRecordById", params, new FunctionCallback<String>() {
+//            @Override
+//            public void done(String response, ParseException e) {
+//                if (e == null) {
+//
+//                    Log.d(TAG, "done: Response = " + response);
+//
+//                } else {
+//                    Log.e(TAG, "done: Error: " + e.getMessage());
+//                }
+//            }
+//        });
+
+//        HashMap params = new HashMap();
+//
+//        params.put("oldName","Iniesta");
+//        params.put("name", "Iniesta");
+//        params.put("age", 34);
+//
+//        ParseCloud.callFunctionInBackground("updateStudentRecordByName", params, new FunctionCallback<String>() {
+//            @Override
+//            public void done(String response, ParseException e) {
+//                if (e == null) {
+//
+//                    Log.d(TAG, "done: Response = " + response);
+//
+//                } else {
+//                    Log.e(TAG, "done: Error: " + e.getMessage());
+//                }
+//            }
+//        });
+
+
+//        HashMap<String, ArrayList> params = new HashMap<>();
+
+//        ArrayList<Integer> ids = new ArrayList<>();
+//        ids.add(9);
+//        ids.add(10);
+//        ArrayList<String> names = new ArrayList<>();
+//        names.add("Darren");
+//        names.add("Gal");
+//
+//        ArrayList<Integer> ages = new ArrayList<>();
+//        ages.add(18);
+//        ages.add(40);
+//
+//        params.put("ids", ids);
+//        params.put("names", names);
+//        params.put("ages", ages);
+//
+//        ParseCloud.callFunctionInBackground("updateStudentRecordsById", params, new FunctionCallback<String>() {
+//            @Override
+//            public void done(String response, ParseException e) {
+//                if (e == null) {
+//
+//                    Log.d(TAG, "done: Response = " + response);
+//
+//                } else {
+//                    Log.e(TAG, "done: Error: " + e.getMessage());
+//                }
+//            }
+//        });
+
+        // HashMap<String, ArrayList> params = new HashMap<>();
+
+        // ArrayList<String> oldNames = new ArrayList<>();
+        // oldNames.add("Darren");
+        // oldNames.add("Gal");
+        // ArrayList<String> names = new ArrayList<>();
+        // names.add("Darren Sammy");
+        // names.add("Gilly");
+
+        // ArrayList<Integer> ages = new ArrayList<>();
+        // ages.add(40);
+        // ages.add(18);
+
+        // params.put("oldNames", oldNames);
+        // params.put("names", names);
+        // params.put("ages", ages);
+
+        // ParseCloud.callFunctionInBackground("updateStudentRecordsByName", params, new FunctionCallback<String>() {
+        //     @Override
+        //     public void done(String response, ParseException e) {
+        //         if (e == null) {
+
+        //             Log.d(TAG, "done: Response = " + response);
+
+        //         } else {
+        //             Log.e(TAG, "done: Error: " + e.getMessage());
+        //         }
+        //     }
+        // });
+
 
 /*        Not Working
         HashMap<String,ArrayList<HashMap>> params = new HashMap<>();
@@ -312,7 +411,8 @@ public class MainActivity extends AppCompatActivity {
 
         students.add(student);
 
-        params.put("students",students);*/
+        params.put("students",students);
+*/
 
 //        HashMap<String,ArrayList> params = new HashMap<>();
 //

@@ -114,3 +114,56 @@ Now Cloud code is updated to your Back4App server
 ## How to Configure Cloud Code on AWS
 
 [Click here](https://docs.bitnami.com/aws/apps/parse/#how-to-add-your-custom-cloud-code-to-your-parse-server-stack)
+
+## About Cloud Code
+
+The **main.js** file contains the Cloud code.
+
+There are 2 types of Cloud code
+
+1. NoSQL based
+
+2. MySQL based
+
+## NoSQL Based
+
+Number of NoSQL Based Cloud functions: 9
+
+### NoSQL Classes Setup
+
+* You need to make 3 Classes
+
+1. Movies
+
+    ![Movies](images/parse_dashboard_movies_class.png)
+
+    Fields:
+
+    * name ( Type: String )
+    * duration ( Type: Number )
+
+2. Files
+
+    ![Files](images/parse_dashboard_files_class.png)
+
+    Fields:
+
+    * files ( Type: Files )
+
+3. Profile Photo
+
+    ![Files](images/parse_dashboard_profile_photo_class.png)
+
+    Fields:
+
+    * profile_photo ( Type: Files )
+
+---
+**NOTE**
+
+It is not necessary to enter same data in your classes.
+However data entered must satisfy coloumn data type.
+
+---    
+
+

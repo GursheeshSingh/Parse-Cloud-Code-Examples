@@ -3,24 +3,38 @@ var serviceName = "YOUR_SERVER_NAME_HERE";
 var apiKey = "YOUR_API_KEY_HERE";
 var sessionToken = "SESSION_TOKEN_HERE";
 
+/*
+    NoSQL Based
+*/
+
+/*
+
+    Function number: 1
+    Function name: cloudCodeTest
+    Parameters type: -
+    Parameters description: no-params
+    Description: Function to test if cloud functions are successfullt deployed and running. 
+    Response type: String
+    Response description: "Hello world"
+
+*/
+
 Parse.Cloud.define("cloudCodeTest", function(request, response) {
     response.success("Hello World");
 });
-// Parse.Cloud.define("averageStars", function(request, response) {
-//     const query = new Parse.Query("Review");
-//     query.equalTo("movie", request.params.movie);
-//     query.find()
-//       .then((results) => {
-//         let sum = 0;
-//         for (let i = 0; i < results.length; ++i) {
-//           sum += results[i].get("stars");
-//         }
-//         response.success(sum / results.length);
-//       })
-//       .catch(() =>  {
-//         response.error("movie lookup failed");
-//       });
-//   });
+
+/*
+
+    Function number: 2
+    Function name: moviesList
+    Parameters type: -
+    Parameters description: no-params
+    Description: Function returns list of all Movies 
+    Response type: ArrayList<ParseObject> (Android)
+    Response description: Contains list of ParseObject (Android)
+
+*/
+
 Parse.Cloud.define("moviesList", function(request, response) {
     const query = new Parse.Query("Movies");
     query
@@ -33,6 +47,17 @@ Parse.Cloud.define("moviesList", function(request, response) {
         });
 });
 
+/*
+
+    Function number: 3
+    Function name: longMoviesList
+    Parameters type: -
+    Parameters description: no-params
+    Description: Function returns list of Long ( duration >= 2 ) Movies 
+    Response type: Array of Parse Object, ArrayList<ParseObject> (Android)
+    Response description: Contains list of all Long ( duration >= 2 ) Movies of type ParseObject (Android)
+
+*/
 // Parse.Cloud.define("longMoviesList", function(request, response) {
 //     const query = new Parse.Query("Movies");
 //     query.find()
@@ -50,7 +75,19 @@ Parse.Cloud.define("moviesList", function(request, response) {
 //       });
 // });
 
+
 //Improved Version
+/*
+
+    Function number: 4
+    Function name: longMoviesList (Improved Version)
+    Parameters type: -
+    Parameters description: no-params
+    Description: Function returns list of Long ( duration > 2 ) Movies 
+    Response type: Array of Parse Object, ArrayList<ParseObject> (Android)
+    Response description: Contains list of all Long ( duration > 2 ) Movies of type ParseObject (Android)
+
+*/
 Parse.Cloud.define("longMoviesList", function(request, response) {
     let query = new Parse.Query("Movies");
     query.greaterThan("duration", 2);
@@ -64,6 +101,17 @@ Parse.Cloud.define("longMoviesList", function(request, response) {
         });
 });
 
+/*
+
+    Function number: 5
+    Function name: avgMovieDuration
+    Parameters type: -
+    Parameters description: no-params
+    Description: Function returns Average Duration of all Movies 
+    Response type: Double (Android)
+    Response description: Average Duration of all movies
+
+*/
 Parse.Cloud.define("avgMovieDuration", function(request, response) {
     const query = new Parse.Query("Movies");
     query
@@ -80,6 +128,18 @@ Parse.Cloud.define("avgMovieDuration", function(request, response) {
         });
 });
 
+
+/*
+
+    Function number: 6
+    Function name: profilePhotos
+    Parameters type: -
+    Parameters description: no-params
+    Description: Function gives all the profile photos in ProfilePhotos class 
+    Response type:  Array of Parse Object, ArrayList<ParseObject> (Android)
+    Response description: List containing Parse Objects having Profile Photos of ParseFile type with key(profile_photo) .
+
+*/
 Parse.Cloud.define("profilePhotos", function(request, response) {
     const query = new Parse.Query("ProfilePhotos");
     query
@@ -93,11 +153,36 @@ Parse.Cloud.define("profilePhotos", function(request, response) {
         });
 });
 
-//Put Statements
+
+/*
+
+    Function number: 7
+    Function name: cloudCodePutTest
+    Parameters type: String
+    Parameters description: Any String
+    Description: Function gives back the string passed 
+    Response type:  String
+    Response description: String passed in parameter.
+
+*/
 
 Parse.Cloud.define("cloudCodePutTest", function(request, response) {
     response.success(request.params.name);
 });
+
+
+//Put Statements
+
+/*
+    Function number: 8
+    Function name: addMovie
+    Parameters type: Hashmap (non-generic)
+    Parameters description: Hashmap  mapping - ( name , movieName ) and ( duration , movieDuration )
+    Description: Function adds Movie to Movies Class
+    Response type:  String
+    Response description: SUCCESSFUL OR NOT.
+
+*/
 
 // Parse.Cloud.define("addMovie", function(request, response) {
 //     let name = request.params.name;
@@ -143,7 +228,16 @@ Parse.Cloud.define("cloudCodePutTest", function(request, response) {
 // });
 
 //Passing ParseFile
+/*
+    Function number: 9
+    Function name: addFile
+    Parameters type: Hashmap (non-generic)
+    Parameters description: Hashmap  mapping - ( file , file )
+    Description: Function adds File to File Class
+    Response type:  String
+    Response description: SUCCESSFUL OR NOTs.
 
+*/
 Parse.Cloud.define("addFile", function(request, response) {
     let Files = Parse.Object.extend("Files");
     let files = new Files();
